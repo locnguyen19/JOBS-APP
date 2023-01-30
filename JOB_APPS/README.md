@@ -1,27 +1,4 @@
-//UPDATE A JOB
-const updateJob = async (req, res) => {
-  const { id: jobId } = req.params;
-  const { company, position } = req.body;
-
-  if (!position || !company) {
-    throw new BadRequestError('Please provide all values');
-  }
-  const job = await Job.findOne({ _id: jobId });
-
-  if (!job) {
-    throw new NotFoundError(`No job with id :${jobId}`);
-  }
-  //   // check permissions
-
-  checkPermissions(req.user, job.createdBy);
-
-  //  const updatedJob = await Job.findOneAndUpdate({ _id: jobId }, req.body, {
-  //    new: true,
-  //    runValidators: true,
-  //  });
-  job.position = position;
-  job.company = company;
-
-  await job.save()
-  res.status(StatusCodes.OK).json({ job });
-};
+This is a job app to demonstrate backend/frontend functionality and using databases (here I use Mongo DB) to save data..
+In the app users can create/edit/search/sort jobs after creating an account and after logging in. 
+Technologies used in this project are Node Js, Exprerss Js, React Js, and other current popular frameworks
+![image](https://user-images.githubusercontent.com/63783152/215532636-9863df52-ef9a-4de1-a592-e1105770ccef.png)
